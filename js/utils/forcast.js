@@ -13,12 +13,11 @@ const getCurrentConditions = async (locationCode) => {
 const getCityUpdateInfo = async (city) => {
   const response = await getLocationInfo(city);
   const { locationInfo } = response;
-  const currentConditions = await getCurrentConditions(locationInfo.Key);
-  console.log(currentConditions);
+  const weatherInfo = await getCurrentConditions(locationInfo.Key);
   return {
     locationInfo,
-    currentConditions,
+    weatherInfo,
   };
 };
 
-getCityUpdateInfo('kampala');
+module.exports = getCityUpdateInfo;
