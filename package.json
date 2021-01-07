@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
-    "bent": "^7.3.12"
+    "bent": "^7.3.12",
+    "express": "^4.17.1",
+    "path": "^0.12.7"
   }
 }
