@@ -7,8 +7,11 @@
     <title>{{title}}</title>
   </head>
   <body>
-    <h1>{{ title}}</h1>
-    <h3>{{ name}}</h3>
+    {{>header}}
+    <main>
+      Main goes here
+    </main>
+    {{>footer}}
     <script src="./js/app.js"></script>
   </body>
 </html>

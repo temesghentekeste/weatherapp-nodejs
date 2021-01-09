@@ -1,11 +1,13 @@
 const path = require('path');
 const express = require('express');
+const hbs = require('hbs');
 
 const app = express();
 
 // Define paths for express config
 const publicDirPath = path.join(__dirname, '../public');
-const viewDirPath = path.join(__dirname, '../../templates');
+const viewsPath = path.join(__dirname, '../../templates/views');
+const partialsPath = path.join(__dirname, '../../templates/partials');
 
 // Setup static directory to serve
 app.use(express.static(publicDirPath));
@@ -13,9 +15,10 @@ app.use(express.static(publicDirPath));
 // Setup handlebars views and views location
 // Set express view engine setting to use handlebars as view engine
 app.set('view engine', 'hbs');
-// Set express view path setting to use absolute path 
-app.set('views', viewDirPath);
+// Set express view path setting to use absolute path
+app.set('views', viewsPath);
 
+hbs.registerPartials(partialsPath);
 
 // Routes
 app.get('', (req, res) => {
@@ -23,23 +26,23 @@ app.get('', (req, res) => {
   // second argument will be used as a dynamic content, it is an object for my view to access; I can inject it to my view using {{}}
   res.render('index', {
     title: 'Weather App',
-    name: 'Temesghen Tekeste'
+    name: 'Temesghen Tekeste',
   });
 });
 
 app.get('/about', (req, res) => {
   res.render('about', {
     title: 'About',
-    name: 'Temesghen Tekeste'
-  })
-})
+    name: 'Temesghen Tekeste',
+  });
+});
 
 app.get('/help', (req, res) => {
   res.render('help', {
     title: 'Help',
-    message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet maiores officiis aliquid inventore illum nisi soluta accusamus enim minus alias.Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid aut rem nam tempore provident! Similique iusto exercitationem porro soluta nostrum molestias assumenda earum, labore laudantium, inventore nesciunt consequuntur quos odio asperiores laborum veritatis voluptatem placeat minus accusantium commodi facere. Voluptatibus!' 
-  })
-})
+    name: 'Temesghen Tekeste',
+  });
+});
 app.get('/weather', (req, res) => {
   res.send([
     {
