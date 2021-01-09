@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #eee;
+}
+
+.profile {
+  width: 100px;
+}
+
+.message {
+  width: 45%;
+  line-height: 1.5;
+  font-size: 1.5rem;
+  text-align: justify;
+  margin: 1rem;
+}
