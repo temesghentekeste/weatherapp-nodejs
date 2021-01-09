@@ -66,6 +66,22 @@ app.get('/contact', (req, res) => {
   });
 });
 
+app.get('/help/*', (req, res) => {
+  res.render('404', {
+    title: '404',
+    name: 'Temesghen Tekeste',
+    message: 'Help article not found',
+  });
+});
+
+app.get('*', (req, res) => {
+  res.render('404', {
+    title: '404',
+    name: 'Temesghen Tekeste',
+    message: 'Page not found',
+  });
+});
+
 app.listen('3000', () => {
   console.log('Server is running on port 3000.');
 });
