@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
+const getCityUpdateInfo = require('./utils/forcast');
 
 const app = express();
 
@@ -45,26 +46,24 @@ app.get('/help', (req, res) => {
   });
 });
 app.get('/weather', (req, res) => {
-  res.send([
-    {
-      city: 'Asmara',
-      date: '07 Jan, 2021',
-    },
-    {
-      Temperature: {
-        Metric: 21,
-        Imperial: 31,
-      },
-    },
-  ]);
-});
-
-app.get('/contact', (req, res) => {
-  console.log('Conntact Me ...');
-  res.send({
-    email: 'Enter your email',
-    message: 'Your message goes here...',
-  });
+  if (!req.query.city)
+    return res.send({
+      error: 'You must provide location address.',
+    });
+  const city = req.query.city;
+  getCityUpdateInfo(city)
+    .then((data) => {
+      const { locationInfo, weatherInfo } = data;
+      res.send({
+        locationInfo,
+        weatherInfo,
+      });
+    })
+    .catch((err) => {
+      res.send({
+        error: 'Something went wrong. Try again.',
+      });
+    });
 });
 
 app.get('/help/*', (req, res) => {
